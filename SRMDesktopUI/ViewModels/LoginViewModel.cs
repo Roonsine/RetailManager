@@ -40,6 +40,38 @@ namespace SRMDesktopUI.ViewModels
             }
         }
 
+
+        public bool isErrorVisible
+        {
+            get 
+            {
+                bool output = false;
+                if(ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                    return output;
+                }
+                return output;
+            }
+
+        }
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set 
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => isErrorVisible);
+                NotifyOfPropertyChange(() => ErrorMessage);
+
+            }
+        }
+
+
+
         public bool CanLogin
         {
             get
@@ -57,11 +89,12 @@ namespace SRMDesktopUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(userName, password);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorMessage = ex.Message;
             }
         }
 
