@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SRMDesktopUi.Library.Api;
 using SRMDesktopUI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,8 @@ namespace SRMDesktopUI.ViewModels
             {
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(userName, password);
+
+                await _apiHelper.GetLoggedInUserInfo(result.access_Token);
             }
             catch (Exception ex)
             {
