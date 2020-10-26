@@ -60,7 +60,7 @@ namespace SRMDesktopUi.Library.Api
             apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer { token }");
 
-            using (HttpResponseMessage response = await apiClient.GetAsync("/User"))
+            using (HttpResponseMessage response = await apiClient.GetAsync("/api/User"))
             {
                 if (response.IsSuccessStatusCode)
                 {
