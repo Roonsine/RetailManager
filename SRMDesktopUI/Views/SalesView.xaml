@@ -36,7 +36,19 @@
                  MinHeight="200" MinWidth="150" SelectedItem="{Binding SelectedProduct}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding ProductName}"/>
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Text="{Binding ProductName}"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                <TextBlock Text="Price: " FontSize="14"/>
+                                <TextBlock Text="{Binding RetailPrice, StringFormat='{}{0:c}'}" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                <TextBlock Text="Qty: " FontSize="14"/>
+                                <TextBlock Text="{Binding QuantityInStock}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -58,7 +70,20 @@
                  MinHeight="200" MinWidth="150">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding DisplayText}"/>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Product.ProductName}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                <TextBlock Text="Price: " FontSize="14"/>
+                                <TextBlock Text="{Binding Product.RetailPrice, StringFormat='{}{0:c}'}" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                <TextBlock Text="Qty: " FontSize="14"/>
+                                <TextBlock Text="{Binding QuantityInCart}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
