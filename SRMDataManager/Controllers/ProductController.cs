@@ -12,6 +12,7 @@ namespace SRMDataManager.Controllers
     [Authorize]
     public class ProductController : ApiController
     {
+        
         public List<ProductModel> Get()
         {
             ProductData data = new ProductData();

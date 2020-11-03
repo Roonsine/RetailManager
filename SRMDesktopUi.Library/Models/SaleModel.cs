@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SRMDesktopUi.Library.Models
 {
-    public class CartItemModel
+    public class SaleModel
     {
-        public ProductModel Product { get; set; }
-        public int QuantityInCart { get; set; }
+        public List<SaleDetailModel> SaleDetails { get; set; } = new List<SaleDetailModel>();
+        
     }
 }
