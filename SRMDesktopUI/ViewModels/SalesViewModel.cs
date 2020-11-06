@@ -41,6 +41,19 @@ namespace SRMDesktopUI.ViewModels
             Products = new BindingList<ProductDisplayModel>(products);
         }
 
+        private async Task ResetSalesViewModel()
+        {
+            Cart = new BindingList<CartItemDisplayModel>();
+
+            // TODO - Add clearing the selectedCartItem if it does not do it itself
+            await LoadProducts();
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
+        }
+
         private BindingList<ProductDisplayModel> _products;
 
         public BindingList<ProductDisplayModel> Products
@@ -217,6 +230,7 @@ namespace SRMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanAddToCart);
         }
 
         public bool CanCheckOut
@@ -246,8 +260,9 @@ namespace SRMDesktopUI.ViewModels
                     Quantity = item.QuantityInCart
                 });
             }
-
             await _saleEndpoint.PostSale(sale);
+
+            await ResetSalesViewModel();
         }
     }
 }
