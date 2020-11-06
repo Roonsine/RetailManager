@@ -53,19 +53,6 @@ namespace SRMDesktopUI.ViewModels
             }
         }
 
-        private ProductDisplayModel _selectedProduct;
-
-        public ProductDisplayModel SelectedProduct
-        {
-            get { return _selectedProduct; }
-            set 
-            {
-                _selectedProduct = value;
-                NotifyOfPropertyChange(() => SelectedProduct);
-            }
-        }
-
-
         private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
         public BindingList<CartItemDisplayModel> Cart
         {
@@ -135,6 +122,18 @@ namespace SRMDesktopUI.ViewModels
             }
         }
 
+        private ProductDisplayModel _selectedProduct;
+
+        public ProductDisplayModel SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set
+            {
+                _selectedProduct = value;
+                NotifyOfPropertyChange(() => SelectedProduct);
+                NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
 
         public bool CanAddToCart
         {
@@ -175,20 +174,44 @@ namespace SRMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => CanCheckOut);
         }
 
+        private CartItemDisplayModel _selectedCartItem;
+
+        public CartItemDisplayModel SelectedCartItem
+        {
+            get { return _selectedCartItem; }
+            set
+            {
+                _selectedCartItem = value;
+                NotifyOfPropertyChange(() => SelectedCartItem);
+                NotifyOfPropertyChange(() => CanRemoveFromCart);
+            }
+        }
+
         public bool CanRemoveFromCart
         {
             get
             {
                 bool output = false;
-
-                // make sure something is selected
+                if(SelectedCartItem != null && SelectedCartItem?.QuantityInCart > 0)
+                {
+                    output = true;
+                }
                 return output;
             }
         }
 
         public void RemoveFromCart()
         {
-            SelectedProduct.QuantityInStock += ItemQuantity;
+            SelectedCartItem.Product.QuantityInStock += 1;
+            if(SelectedCartItem.QuantityInCart > 1)
+            {
+                SelectedCartItem.QuantityInCart -= 1;
+            } 
+            else
+            {
+                Cart.Remove(SelectedCartItem);
+            }
+
             ItemQuantity = 1;
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
