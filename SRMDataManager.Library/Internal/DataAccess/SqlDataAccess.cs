@@ -55,6 +55,8 @@ namespace SRMDataManager.Library.Internal.DataAccess
             _connection = new SqlConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction();
+
+            isClosed = false;
         }
 
         // Load using the transaction
@@ -73,15 +75,18 @@ namespace SRMDataManager.Library.Internal.DataAccess
                 commandType: CommandType.StoredProcedure, transaction: _transaction);
         }
 
+        private bool isClosed = false;
         // Close connection/stop transaction method 
         public void CommitTransaction()
         {
+            isClosed = true;
             _transaction?.Commit();
             _connection?.Close();
         }
 
         public void RollBackTransaction()
         {
+            isClosed = true;
             _transaction?.Rollback();
             _connection?.Close();
         }
@@ -89,7 +94,20 @@ namespace SRMDataManager.Library.Internal.DataAccess
         // Dispose
         public void Dispose()
         {
-            CommitTransaction();
+            if (!isClosed)
+            {
+                try
+                {
+                    CommitTransaction();
+                }
+                catch
+                {
+                    // TODO - Log this issue.
+                }
+            }
+
+            _transaction = null;
+            _connection = null;
         }
     }
 }
