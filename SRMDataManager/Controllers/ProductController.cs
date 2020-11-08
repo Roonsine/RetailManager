@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace SRMDataManager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Cashier")]
     public class ProductController : ApiController
     {
         
