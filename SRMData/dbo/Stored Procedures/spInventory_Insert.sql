@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spInventory_Insert]
-	@ProductID int,
+	@ProductId int,
 	@Quantity int,
 	@PurchasePrice money,
 	@PurchaseDate datetime2
