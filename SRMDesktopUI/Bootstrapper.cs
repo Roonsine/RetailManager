@@ -48,6 +48,7 @@ namespace SRMDesktopUI
             _container.Instance(ConfigureAutoMapper());
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>()
+                .PerRequest<IUserEndpoint, UserEndpoint>()
                 .PerRequest<ISaleEndpoint, SaleEndpoint>();
 
             _container
