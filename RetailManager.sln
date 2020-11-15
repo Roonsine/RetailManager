@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRMDesktopUI", "SRMDesktopU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRMDataManager.Library", "SRMDataManager.Library\SRMDataManager.Library.csproj", "{04DCB5BC-34A9-4D5F-9137-09915D5BDC00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRMDesktopUi.Library", "SRMDesktopUi.Library\SRMDesktopUi.Library.csproj", "{D0B381FB-C71F-40AC-B0B3-A8A14D6FC26C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRMDesktopUi.Library", "SRMDesktopUi.Library\SRMDesktopUi.Library.csproj", "{D0B381FB-C71F-40AC-B0B3-A8A14D6FC26C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{20B5FF9F-70D9-4636-A4B8-93A3E6E05E8F}"
 EndProject
